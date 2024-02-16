@@ -11,6 +11,21 @@ pipeline {
                 sh './gradlew clean build'
             }
         }
+
+        pipeline {
+    agent any
+    
+    environment {
+        JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
+    }
+    
+    stages {
+        // Define stages...
+    }
+    
+    // Define post actions...
+}
+
         
         stage('Docker Build') {
             steps {
@@ -42,3 +57,4 @@ pipeline {
         }
     }
 }
+

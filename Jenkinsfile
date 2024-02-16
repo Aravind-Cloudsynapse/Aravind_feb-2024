@@ -1,6 +1,10 @@
 pipeline {
     agent any
     
+    environment {
+        JAVA_HOME = "/usr/lib/jvm/java-11-openjdk-amd64"
+    }
+    
     stages {
         stage('Build') {
             steps {
@@ -11,21 +15,6 @@ pipeline {
                 sh './gradlew clean build'
             }
         }
-
-        pipeline {
-    agent any
-    
-    environment {
-        JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
-    }
-    
-    stages {
-        // Define stages...
-    }
-    
-    // Define post actions...
-}
-
         
         stage('Docker Build') {
             steps {
@@ -40,7 +29,7 @@ pipeline {
             steps {
                 // Run Docker container
                 script {
-                    docker.image('nginx1:latest').run(' -itd -p 8080:8090', '--name webapp')
+                    docker.image('nginx1:latest').run('-itd -p 8080:8090', '--name webapp')
                 }
             }
         }
@@ -57,4 +46,3 @@ pipeline {
         }
     }
 }
-

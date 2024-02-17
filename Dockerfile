@@ -2,7 +2,7 @@
 FROM nginx:latest
 
 # Copy the custom NGINX configuration file to the container
-COPY config/nginx.conf /etc/nginx/sites-available
+COPY /etc/nginx/sites-available/
 
 # Copy your Java application WAR file to the NGINX default HTML directory
 COPY your-application.war /usr/share/nginx/html/

@@ -2,14 +2,14 @@ pipeline {
     agent any
     
     environment {
-        JAVA_HOME='/usr/lib/jvm/java-8-openjdk-amd64'
+        JAVA_HOME = '/usr/lib/jvm/java-8-openjdk-amd64'
     }
     
     stages {
         stage('Build') {
             steps {
                 // Checkout the code from the SCM
-                git 'https://github.com/Aravind-Cloudsynapse/Aravind_feb-2024.git'
+                git branch: 'master', url: 'https://github.com/Aravind-Cloudsynapse/Aravind_feb-2024.git'
                 
                 // Run Gradle build to generate the .war file
                 sh './gradlew clean build'
@@ -29,7 +29,7 @@ pipeline {
             steps {
                 // Run Docker container
                 script {
-                    docker.image('nginx1:latest').run('-itd -p 8080:8090', '--name webapp')
+                    docker.image('nginx1:latest').run('-d -p 8080:80 --name webapp')
                 }
             }
         }
